@@ -23,6 +23,7 @@ AM_PROG_AS
 AM_PROG_CC_C_O
 
 dnl Checks for libraries.
+AC_CHECK_LIB(gcc_s, _Unwind_Resume)
 AC_CHECK_LIB(uca, __uc_get_grs)
 OLD_LIBS=${LIBS}
 AC_SEARCH_LIBS(dlopen, dl)
@@ -377,10 +378,6 @@ if test x$qcc_compiler = xyes; then
     LDFLAGS_NOSTARTFILES="-XCClinker -Wc,-nostartfiles"
 else
     LDFLAGS_NOSTARTFILES="-XCClinker -nostartfiles"
-fi
-
-if test x$GCC = xyes -a x$intel_compiler != xyes -a x$qcc_compiler != xyes -a x$android != xyes; then
-  LIBCRTS="-lgcc_s"
 fi
 
 AC_MSG_CHECKING([for __builtin___clear_cache])
